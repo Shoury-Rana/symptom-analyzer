@@ -1,15 +1,16 @@
 import joblib
 import pandas as pd
 
-from pathlib import Path
+from django.conf import settings
+import os
 
-parent_path = Path(__file__).parent
+MODEL_PATH = os.path.join(settings.BASE_DIR, 'predictor', 'ai_models', 'health_risk_model.pkl')
 
 # Load files only once
-model = joblib.load(f'{parent_path}\\ai_models\health_risk_model.pkl')
-scaler = joblib.load(f'{parent_path}\\ai_models\scaler.pkl')
-feature_order = joblib.load(f'{parent_path}\\ai_models\\feature_order.pkl')
-impute_values = joblib.load(f'{parent_path}\\ai_models\impute_values.pkl')
+model = joblib.load(os.path.join(settings.BASE_DIR, 'predictor', 'ai_models', 'health_risk_model.pkl'))
+scaler = joblib.load(os.path.join(settings.BASE_DIR, 'predictor', 'ai_models', 'scaler.pkl'))
+feature_order = joblib.load(os.path.join(settings.BASE_DIR, 'predictor', 'ai_models', 'feature_order.pkl'))
+impute_values = joblib.load(os.path.join(settings.BASE_DIR, 'predictor', 'ai_models', 'impute_values.pkl'))
 
 labels = [
     'diabetes_risk', 'heart_attack_risk', 'hypertension_risk',
